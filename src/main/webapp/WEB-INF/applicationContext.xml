@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	  http://www.springframework.org/schema/beans/spring-beans.xsd
+	   http://www.springframework.org/schema/util
+	    http://www.springframework.org/schema/util/spring-util-3.0.xsd
+	     http://camel.apache.org/schema/spring
+	      http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+	<util:map id="realm">
+		<entry key="admin" value="admin" />
+		<entry key="user" value="password" />
+	</util:map>
+
+	<bean class="com.backbase.services.AtmListService" id="stdrouteBuilder"
+		autowire="byName">
+
+	</bean>
+
+	<bean id="atmJSON" class="com.backbase.bean.AtmObject">
+		<property name="address" ref="addr"></property>
+		<property name="geolocation" ref="geoloc"></property>
+	</bean>
+	<bean id="addr" class="com.backbase.bean.Address"></bean>
+	<bean id="geoloc" class="com.backbase.bean.GeoLocation"></bean>
+
+	<!-- Camel Context -->
+
+	<camelContext xmlns="http://camel.apache.org/schema/spring">
+		<routeBuilder ref="stdrouteBuilder" />
+	</camelContext>
+
+	<bean id="restletComponent" class="org.restlet.Component" />
+
+	<bean id="RestletComponentService" class="org.apache.camel.component.restlet.RestletComponent">
+		<constructor-arg index="0">
+			<ref bean="restletComponent" />
+		</constructor-arg>
+	</bean>
+</beans>
