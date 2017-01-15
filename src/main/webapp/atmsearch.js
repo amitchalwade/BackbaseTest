@@ -1,42 +1,24 @@
 $(document).ready(function() {
 
 $('a').click(function(event) {
-			event.preventDefault();
+	   	event.preventDefault();
 			var url = $(this).attr('href');
 			var resultElement = $('#resultDiv'); 
 		    resultElement.html('<br>');
 		    
-		      
-			$.ajax({
+		    $.ajax({
 				url : $(this).attr('href'),
 				cache : false,
-				method : 'get',
+				method : 'GET',
 				datatype : 'json',
 				success : function(data) {
-				
-					var arr = $.parseJSON(data);
-
-					$.each(arr, function(index, value) {
-
-						$.each(value, function(key, innervalue) {
-							
-							if(innervalue.type == "ING") {
-								$("#resultDiv").append("<ul><li>TYPE   : "+ innervalue.type+"</li></ul>" );
-								$("#resultDiv").append("<li>Address- City : " +innervalue.address.city+"</li>" );
-								$("#resultDiv").append("<li>House Number : "+ innervalue.address.housenumber+"</li>" );
-								$("#resultDiv").append("<li>Postal Code  : "+ innervalue.address.postalcode+"</li>" );
-								$("#resultDiv").append("<li>Street : "+ innervalue.address.street+"</li>" );
-								$("#resultDiv").append("<li>Geolocation- Lattitude : "+ innervalue.address.geoLocation.lat+"</li>" );
-								$("#resultDiv").append("<li>Geolocation- Londutue  : "+ innervalue.address.geoLocation.lng+"</li>" );
-								$("#resultDiv").append("<li>Distance to ATM  : "+ innervalue.distance+"</li>" );
-								$("#resultDiv").append("----------------------------------------------------------------------------" );
-							}
-							
-
-						});
-
-					});
-				}
+					var jsonPretty = JSON.stringify(data,undefined,2);
+					console.log(jsonPretty);
+					$('#resultDiv').append("<pre>" + jsonPretty + "</pre>");
+									},
+		    	error: function() {
+		   		 resultElement.html('<br> Unable to parse incoming JSON data');
+		      }
 			});
 
 		});
@@ -57,39 +39,16 @@ $('#searchbtn').click(function() {
 	$.ajax({
 		url : url+requestCity,
 		cache : false,
-		method : 'get',
+		method : 'GET',
 		datatype : 'json',
 		success : function(data) {
-			
-			var arr = $.parseJSON(data);
-			$.each(arr, function(index, value) {
-
-				$.each(value, function(key, innervalue) {
-					
-					if(innervalue.address.city == requestCity ) {
-						isPresent = true;
-						$("#resultDiv").append("<ul><li>Address- City : " +innervalue.address.city+"</li>" );
-						$("#resultDiv").append("<li>House Number : "+ innervalue.address.housenumber+"</li>" );
-						$("#resultDiv").append("<li>Postal Code  : "+ innervalue.address.postalcode+"</li>" );
-						$("#resultDiv").append("<li>Street : "+ innervalue.address.street+"</li>" );
-						$("#resultDiv").append("<li>Geolocation- Lattitude : "+ innervalue.address.geoLocation.lat+"</li>" );
-						$("#resultDiv").append("<li>Geolocation- Londutue  : "+ innervalue.address.geoLocation.lng+"</li>" );
-						$("#resultDiv").append("<li>Distance to ATM  : "+ innervalue.distance+"</li>" );
-						$("#resultDiv").append("<li>TYPE   : "+ innervalue.type+"</li></ul>" );
-						$("#resultDiv").append("----------------------------------------------------------------------------" );
-						
-					
-					}
-					
-
-				});
-
-			});
-		if(isPresent == false) {
-				
-				 resultElement.html('<br> Invalid Search City - No data found ');
-			}
-		}
+			var jsonPretty = JSON.stringify(data,undefined,2);
+			console.log(jsonPretty);
+			$('#resultDiv').append("<pre>" + jsonPretty + "</pre>");
+							},
+    	error: function() {
+    		$('#resultDiv').append("<br>Invalid Search City.Please enter valid CITY name.</br>");
+      }
 	});
 
 	

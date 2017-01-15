@@ -1,6 +1,7 @@
 package com.backbase.bean;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -10,43 +11,26 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "lat", "lng" })
-public class GeoLocation {
+@JsonPropertyOrder({ "ATM" })
+public class RootObject {
 
-	@JsonProperty("lat")
-	private String lat;
-	@JsonProperty("lng")
-	private String lng;
+	@JsonProperty("ATM")
+	private List<ATM> aTM = null;
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-	@JsonProperty("lat")
-	public String getLat() {
-		return lat;
+	@JsonProperty("ATM")
+	public List<ATM> getATM() {
+		return aTM;
 	}
 
-	@JsonProperty("lat")
-	public void setLat(String lat) {
-		this.lat = lat;
+	@JsonProperty("ATM")
+	public void setATM(List<ATM> aTM) {
+		this.aTM = aTM;
 	}
 
-	public GeoLocation withLat(String lat) {
-		this.lat = lat;
-		return this;
-	}
-
-	@JsonProperty("lng")
-	public String getLng() {
-		return lng;
-	}
-
-	@JsonProperty("lng")
-	public void setLng(String lng) {
-		this.lng = lng;
-	}
-
-	public GeoLocation withLng(String lng) {
-		this.lng = lng;
+	public RootObject withATM(List<ATM> aTM) {
+		this.aTM = aTM;
 		return this;
 	}
 
@@ -60,7 +44,7 @@ public class GeoLocation {
 		this.additionalProperties.put(name, value);
 	}
 
-	public GeoLocation withAdditionalProperty(String name, Object value) {
+	public RootObject withAdditionalProperty(String name, Object value) {
 		this.additionalProperties.put(name, value);
 		return this;
 	}

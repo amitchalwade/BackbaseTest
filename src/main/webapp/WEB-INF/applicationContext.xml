@@ -19,13 +19,13 @@
 
 	</bean>
 
-	<bean id="atmJSON" class="com.backbase.bean.AtmObject">
-		<property name="address" ref="addr"></property>
-		<property name="geolocation" ref="geoloc"></property>
-	</bean>
+	<bean id="atmJSON" class="com.backbase.bean.ATM">
+		</bean>
 	<bean id="addr" class="com.backbase.bean.Address"></bean>
 	<bean id="geoloc" class="com.backbase.bean.GeoLocation"></bean>
 
+	<bean id="paseJSON" class="com.backbase.bean.ParseJSON">
+		</bean>
 	<!-- Camel Context -->
 
 	<camelContext xmlns="http://camel.apache.org/schema/spring">
