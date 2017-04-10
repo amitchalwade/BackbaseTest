@@ -7,7 +7,8 @@ Platform support
  
 Compile: mvn clean install
 
-Run the application: mvn jetty:run
+
+Run the application with : mvn jetty:run
 
 Open web browser with http://localhost:8080/BackbaseTest/ 
 
