@@ -11,11 +11,10 @@ Compile: mvn clean install
 Run the application with : mvn jetty:run
 
 Open web browser with http://localhost:8080/BackbaseTest/ 
+this is going to be a nice test 
+
 
 To retrieve an list of ATM  list data , make a http GET request with the userId as part of the url
 REST service url -  http://localhost:8080/BackbaseTest/rs/listATM/{cityname}
 
 AJAX call made from index.jsp will get JSON data object back fron REST web service and display on page. 
-
-i am adding this to test GIT 
-
